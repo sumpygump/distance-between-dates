@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../src/Challenge018/Events.php';
+
+use Challenge018\Events;
+
+$specimens = require 'specimens.php';
+$events = new Events();
+
+printf("Testing with %s specimens\n", count($specimens));
+
+$startTime = microtime(true);
+
+$len = count($specimens);
+for ($i = 0; $i < $len - 1; $i+=2) {
+    $result = $events->compareDates($specimens[$i], $specimens[$i + 1]);
+}
+
+$endTime = microtime(true);
+$diff = $endTime - $startTime;
+
+printf("Completed %s computations in %0.6f seconds\n", $len / 2, $diff);

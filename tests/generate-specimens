@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+// A setsize of 1000 will create 24,000 specimens
+$setSize = 4000;
+$list = [];
+
+// Completely random between 2010 and 2017
+for ($i = 0; $i < $setSize; $i++) {
+    $year = rand(2010, 2017);
+    $month = sprintf("%02d", rand(1, 12));
+
+    $list[] = $year . $month;
+}
+
+// Set of identical dates
+$year = rand(2010, 2017);
+$month = sprintf("%02d", rand(1, 12));
+for ($i = 0; $i < $setSize; $i++) {
+    $list[] = $year . $month;
+}
+
+// Sets within the same year
+for ($i = 0; $i < $setSize; $i++) {
+    $year = rand(2010, 2017);
+    for ($j = 0; $j < 20; $j++) {
+        $month = sprintf("%02d", rand(1, 12));
+        $list[] = $year . $month;
+    }
+}
+
+// Sets off by one year
+for ($i = 0; $i < $setSize; $i++) {
+    $year = rand(2010, 2017);
+    $month = sprintf("%02d", rand(1, 12));
+
+    $list[] = $year . $month;
+
+    $year = $year + rand(-1, 1);
+    $month = sprintf("%02d", rand(1, 12));
+
+    $list[] = $year . $month;
+}
+
+echo '<?php' . PHP_EOL . 'return ' . var_export($list, true) . ";";
+return $list;

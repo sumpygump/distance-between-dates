@@ -1,23 +1,63 @@
 #!/usr/bin/env php
 <?php
+/**
+ * This script will run the algorithms through performance tests
+ *
+ * It will load a specimens array containing thousands of test inputs to then
+ * put each algorithm through its paces and report the time it took
+ */
 
-require __DIR__ . '/../src/Challenge018/Events.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-use Challenge018\Events;
+use Challenge018\InterfaceAlgorithm;
+use Challenge018\AlgorithmSubstr;
+use Challenge018\AlgorithmTimestamps;
+use Challenge018\AlgorithmModulus;
 
 $specimens = require 'specimens.php';
-$events = new Events();
 
-printf("Testing with %s specimens\n", count($specimens));
-
-$startTime = microtime(true);
-
+// Set up samples (specimen pairs)
+$samples = [];
 $len = count($specimens);
 for ($i = 0; $i < $len - 1; $i+=2) {
-    $result = $events->compareDates($specimens[$i], $specimens[$i + 1]);
+    $samples[] = [$specimens[$i], $specimens[$i + 1]];
 }
 
-$endTime = microtime(true);
-$diff = $endTime - $startTime;
+//shuffle($samples);
 
-printf("Completed %s computations in %0.6f seconds\n", $len / 2, $diff);
+$algorithms = [
+    'AlgorithmTimestamps' => new AlgorithmTimestamps(),
+    'AlgorithmSubstr' => new AlgorithmSubstr(),
+    'AlgorithmModulus' => new AlgorithmModulus(),
+];
+
+/**
+ * Test an algorithm
+ *
+ * This will test an algorithm and time it
+ *
+ * @param string $name Name of algorithm
+ * @param object $algorithm Algorithm object
+ * @param array $samples Array of samples use as inputs for test
+ * @return null
+ */
+function testAlgorithm($name, InterfaceAlgorithm $algorithm, $samples)
+{
+    $len = count($samples);
+
+    $startTime = microtime(true);
+
+    for ($i = 0; $i < $len; $i++) {
+        $result = $algorithm->compareDates($samples[$i][0], $samples[$i][1]);
+    }
+
+    $endTime = microtime(true);
+    $diff = $endTime - $startTime;
+
+    printf("  '%s'\t\t%0.6f seconds\n", $name, $diff);
+}
+
+printf("Testing algorithms with %s samples\n", count($samples));
+foreach ($algorithms as $name => $algorithm) {
+    testAlgorithm($name, $algorithm, $samples);
+}

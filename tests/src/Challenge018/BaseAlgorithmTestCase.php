@@ -1,19 +1,27 @@
 <?php
+/**
+ * Base Algorithm Test Case File
+ *
+ * @package Challenge018
+ */
 
 namespace Challenge018\Tests;
 
-require __DIR__ . '../../../../src/Challenge018/Events.php';
-
-use Challenge018\Events;
-
-class EventsTest extends \PHPUnit_Framework_TestCase
+/**
+ * BaseAlgorithmTestCase
+ *
+ * @package Challenge018
+ * @author Jansen Price <jprice@nerdery.com>
+ * @version $Id$
+ */
+class BaseAlgorithmTestCase extends \PHPUnit_Framework_TestCase
 {
-    private $object;
-
-    public function setUp()
-    {
-        $this->object = new Events();
-    }
+    /**
+     * Object under test
+     *
+     * @var mixed
+     */
+    protected $object;
 
     public function testSame()
     {
@@ -64,3 +72,5 @@ class EventsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(237, $result);
     }
 }
+
+

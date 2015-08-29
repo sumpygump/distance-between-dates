@@ -1,15 +1,23 @@
 <?php
+/**
+ * AlgorithmSubstr class file
+ *
+ * @package Challenge018
+ */
 
 namespace Challenge018;
 
 /**
- * Events
+ * Algorithm Substr
+ *
+ * This algorithm converts the inputs into strings and uses substr to parse the
+ * year and month values
  *
  * @package Challenge018
- * @author Name <address@domain>
+ * @author Jansen Price <jprice@nerdery.com>
  * @version $Id$
  */
-class Events
+class AlgorithmSubstr implements InterfaceAlgorithm
 {
     /**
      * Compare two dates in format YYYYMM as integers

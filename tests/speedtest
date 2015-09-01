@@ -54,7 +54,7 @@ function testAlgorithm($name, InterfaceAlgorithm $algorithm, $samples)
     $endTime = microtime(true);
     $diff = $endTime - $startTime;
 
-    printf("  '%s'\t\t%0.6f seconds\n", $name, $diff);
+    printf("  '%s'\t\t%0.6f seconds\t%d per second\n", $name, $diff, $len / $diff);
 }
 
 printf("Testing algorithms with %s samples\n", count($samples));

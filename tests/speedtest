@@ -13,6 +13,13 @@ use Challenge018\InterfaceAlgorithm;
 use Challenge018\AlgorithmSubstr;
 use Challenge018\AlgorithmTimestamps;
 use Challenge018\AlgorithmModulus;
+use Challenge018\AlgorithmCfeinSplit;
+use Challenge018\AlgorithmCfeinMod;
+use Challenge018\AlgorithmJsexton;
+use Challenge018\AlgorithmMseemann;
+use Challenge018\AlgorithmNmallare;
+use Challenge018\AlgorithmTnelson1;
+use Challenge018\AlgorithmTnelson2;
 
 $specimens = require 'specimens.php';
 
@@ -26,10 +33,19 @@ for ($i = 0; $i < $len - 1; $i+=2) {
 //shuffle($samples);
 
 $algorithms = [
-    'AlgorithmTimestamps' => new AlgorithmTimestamps(),
-    'AlgorithmSubstr' => new AlgorithmSubstr(),
-    'AlgorithmModulus' => new AlgorithmModulus(),
+    'AlgorithmJpriceTime' => new AlgorithmTimestamps(),
+    'AlgorithmJpSubstr' => new AlgorithmSubstr(),
+    'AlgorithmJpModulus' => new AlgorithmModulus(),
+    'AlgorithmCfeinSplit' => new AlgorithmCfeinSplit(),
+    'AlgorithmCfeinMod' => new AlgorithmCfeinMod(),
+    'AlgorithmJsexton' => new AlgorithmJsexton(),
+    'AlgorithmMseemann' => new AlgorithmMseemann(),
+    'AlgorithmNmallare' => new AlgorithmNmallare(),
+    'AlgorithmTnelson1' => new AlgorithmTnelson1(),
+    'AlgorithmTnelson2' => new AlgorithmTnelson2(),
 ];
+
+$results = [];
 
 /**
  * Test an algorithm
@@ -41,7 +57,7 @@ $algorithms = [
  * @param array $samples Array of samples use as inputs for test
  * @return null
  */
-function testAlgorithm($name, InterfaceAlgorithm $algorithm, $samples)
+function testAlgorithm($name, InterfaceAlgorithm $algorithm, $samples, &$results)
 {
     $len = count($samples);
 
@@ -54,10 +70,19 @@ function testAlgorithm($name, InterfaceAlgorithm $algorithm, $samples)
     $endTime = microtime(true);
     $diff = $endTime - $startTime;
 
-    printf("  '%s'\t\t%0.6f seconds\t%d per second\n", $name, $diff, $len / $diff);
+    $results[] = ['name' => $name, 'time' => $diff, 'calcsPerSecond' => $len / $diff];
+    //printf("  '%s'\t\t%0.6f seconds\t%d per second\n", $name, $diff, $len / $diff);
 }
 
 printf("Testing algorithms with %s samples\n", count($samples));
 foreach ($algorithms as $name => $algorithm) {
-    testAlgorithm($name, $algorithm, $samples);
+    testAlgorithm($name, $algorithm, $samples, $results);
+}
+
+usort($results, function($a, $b) {
+    return $a['time'] < $b['time'];
+});
+
+foreach ($results as $result) {
+    printf("%s\t\t%0.6f seconds\t%d per second\n", $result['name'], $result['time'], $result['calcsPerSecond']);
 }

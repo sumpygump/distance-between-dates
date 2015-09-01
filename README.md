@@ -30,11 +30,12 @@ $ tests/speedtest
 $ vendor/bin/phpunit ; tests/speedtest 
 PHPUnit 4.8.6 by Sebastian Bergmann and contributors.
 
-.....................
+................................................................. 65 / 90 ( 72%)
+.........................
 
-Time: 332 ms, Memory: 7.25Mb
+Time: 682 ms, Memory: 7.25Mb
 
-OK (21 tests, 21 assertions)
+OK (90 tests, 90 assertions)
 
 Generating code coverage report in HTML format ... done
 Testing algorithms with 48000 samples

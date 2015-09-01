@@ -38,7 +38,7 @@ class AlgorithmModulus implements InterfaceAlgorithm
         $yearB = (int)($dateB / 100);
 
         // If within same year, just subtract
-        if ($yearA == $yearB) {
+        if ($yearA === $yearB) {
             return $dateB - $dateA;
         }
 

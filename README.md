@@ -23,3 +23,22 @@ $ composer install
 $ vendor/bin/phpunit
 $ tests/speedtest
 ```
+
+## Example Output
+
+```
+$ vendor/bin/phpunit ; tests/speedtest 
+PHPUnit 4.8.6 by Sebastian Bergmann and contributors.
+
+.....................
+
+Time: 332 ms, Memory: 7.25Mb
+
+OK (21 tests, 21 assertions)
+
+Generating code coverage report in HTML format ... done
+Testing algorithms with 48000 samples
+  'AlgorithmTimestamps'         1.146300 seconds
+  'AlgorithmSubstr'             0.230900 seconds
+  'AlgorithmModulus'            0.134983 seconds
+```

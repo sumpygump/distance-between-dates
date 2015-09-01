@@ -27,9 +27,7 @@ class AlgorithmCfeinMod implements InterfaceAlgorithm
      */
     public function compareDates($from, $to)
     {
-        $toDays = $to % 100;
-        $fromDays = $from % 100;
-        //multiply year difference by 12 to get months, and divide by 100 (ex: 201500 - 201400)
-        return (($to - $toDays) - ($from - $fromDays)) * 0.12 + $toDays - $fromDays;
+        // Second version of code sent by cfein for this algorithm
+        return (($to - ($to % 100)) - ($from - ($from % 100))) * 0.12 + ($to % 100) - ($from % 100);
     }
 }

@@ -27,11 +27,6 @@ class AlgorithmNmallare implements InterfaceAlgorithm
      */
     public function compareDates($inputB, $inputA)
     {
-        $totalA = (int)substr($inputA, 0, 4) * 12 + (int)substr($inputA, 4, 2);
-        $totalB = (int)substr($inputB, 0, 4) * 12 + (int)substr($inputB, 4, 2);
-        return ($totalA - $totalB);
+        return (substr($inputA, 0, 4) * 12 + substr($inputA, 4, 2)) - (substr($inputB, 0, 4) * 12 + substr($inputB, 4, 2));
     }
 }
-
-
-

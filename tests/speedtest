@@ -20,6 +20,7 @@ use Challenge018\AlgorithmMseemann;
 use Challenge018\AlgorithmNmallare;
 use Challenge018\AlgorithmTnelson1;
 use Challenge018\AlgorithmTnelson2;
+use Challenge018\AlgorithmJedstrom;
 
 $specimens = require 'specimens.php';
 
@@ -43,6 +44,7 @@ $algorithms = [
     'AlgorithmNmallare' => new AlgorithmNmallare(),
     'AlgorithmTnelson1' => new AlgorithmTnelson1(),
     'AlgorithmTnelson2' => new AlgorithmTnelson2(),
+    'AlgorithmJedstrom' => new AlgorithmJedstrom(),
 ];
 
 $results = [];
